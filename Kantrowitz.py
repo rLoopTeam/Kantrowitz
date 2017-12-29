@@ -6,7 +6,7 @@ from mpl_toolkits.mplot3d import Axes3D
 
 vel = np.arange(1, 341, 1) #Creating a velocity matrix from 0 to 340 m/s
 temp = np.arange(263, 324, 1) #Creating a Temperature matrix from 273 to 324 K
-P = 100 # Pressure inside the tube in Pascals
+P = input("Enter the Pressure inside the tube (Pa)\n")
 w, h = 60, 340 #simple variables for width and height of Mach number matrix
 Dpod = np.arange(0.25, 10, 0.25) #Defining a range of pod diameters
 Dtube = [] #Empty array for Calculating corresponding tube diameters
@@ -61,7 +61,6 @@ plt.xlabel('Velocity of the vehicle in m/s')
 plt.ylabel('Mach Number for corresponding speed')
 plt.grid()
 plt.show()
-
 
 '''
 p = range(60)
