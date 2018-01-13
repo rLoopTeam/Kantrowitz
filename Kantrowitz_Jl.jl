@@ -1,16 +1,24 @@
 using Gadfly
+using Plots
 
-vel = collect(0:340)
-Temp = collect(273:323)
-M = Float64[]
+P = 100 #Pa
+R = 287.058 #Rstar = R/M
+vel = collect(1:340)
+Temp = collect(263:323)
+M = Array{Float64}(340, 60)
 
 
 function MachNumber(v,T)
-  R = 287.058 #Rstar = R/M
-  P = 100 #Pa
   γ = 1.4
-  ρ = (P/(R*T))
-  a = sqrt((γ*P)/ρ)
+  a = sqrt(γ*R*T)
   Mach = v/a
   return Mach
 end
+
+for i in 1:340
+    for j in
+        M[i][j] = MachNumber(vel[i], Temp[j])
+    end
+end
+
+println(M)

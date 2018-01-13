@@ -2,11 +2,10 @@ import numpy as np
 import math
 import pandas as pd
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 
 vel = np.arange(1, 341, 1) #Creating a velocity matrix from 0 to 340 m/s
 temp = np.arange(263, 324, 1) #Creating a Temperature matrix from 273 to 324 K
-P = input("Enter the Pressure inside the tube (Pa)\n")
+P = 100 #Pa
 w, h = 60, 340 #simple variables for width and height of Mach number matrix
 Dpod = np.arange(0.25, 10, 0.25) #Defining a range of pod diameters
 Dtube = [] #Empty array for Calculating corresponding tube diameters
@@ -16,8 +15,7 @@ M = [[0 for x in range(w)] for y in range(h)] #Matrix containing Mach number dat
 def speedSound(v,T):
      R = 287.058
      gamma = 1.4
-     d = (P/(R*T))
-     a = np.sqrt((gamma*P)/d)
+     a = np.sqrt(gamma*R*T)
      Mach = v/a
      return Mach
 
@@ -61,22 +59,3 @@ plt.xlabel('Velocity of the vehicle in m/s')
 plt.ylabel('Mach Number for corresponding speed')
 plt.grid()
 plt.show()
-
-'''
-p = range(60)
-q = range(340)
-hf = plt.figure()
-ha = hf.add_subplot(211, projection='3d')
-X, Y = np.meshgrid(p,q)
-ha.plot_wireframe(X, Y, f, rstride=10, cstride=10) #, cmap='coolwarm', linewidth=0, antialiased=False)
-ha.set_xlabel("Temperature in C")
-ha.set_ylabel("Speed in m/s")
-ha.set_zlabel("Mach Number")
-
-hb = hf.add_subplot(212)
-hb.plot(Dtube, Dpod)
-hb.set_xlabel("Diamter of Tube")
-hb.set_ylabel("Diameter of Pod")
-plt.grid()
-plt.show()
-'''
