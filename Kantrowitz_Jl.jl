@@ -16,8 +16,8 @@ function MachNumber(v,T)
 end
 
 for i in 1:340
-    for j in
-        M[i][j] = MachNumber(vel[i], Temp[j])
+    for j in 1:60
+        M[i , j] = MachNumber(vel[i], Temp[j])
     end
 end
 

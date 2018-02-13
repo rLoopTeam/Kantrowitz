@@ -25,9 +25,6 @@ for i in range(340):
     for j in range(60):
         M[i][j] = speedSound(vel[i], temp[j])
 
-#df = pd.DataFrame(M)
-#df.to_csv("Mach_raw.csv")
-#Choosing a Mach number for Calculating Dia of tube.
 f = np.array(M)
 Ma = f[339][59]
 A = (1 + (5 / (Ma**2) ) )**0.5
@@ -46,6 +43,23 @@ x30 = f[: , 40]
 x40 = f[: , 50]
 x50 = f[: , 59]
 
+def slope_calculator(array):
+    v1 = 100
+    v2 = 150
+    m_slope = (array[v2] - array[v1]) / (v2 - v1)
+    return m_slope
+
+
+slope_10 = slope_calculator(x_10)
+slope0 = slope_calculator(x0)
+slope10 = slope_calculator(x10)
+slope20 = slope_calculator(x20)
+slope30 = slope_calculator(x30)
+slope40 = slope_calculator(x40)
+slope50 = slope_calculator(x50)
+
+
+
 plt.figure()
 plt.plot(vel, x_10)
 plt.plot(vel, x0)
@@ -54,7 +68,13 @@ plt.plot(vel, x20)
 plt.plot(vel, x30)
 plt.plot(vel, x40)
 plt.plot(vel, x50)
-plt.legend(['Temp = -10 C', 'Temp = 0 C', 'Temp = 10 C', 'Temp = 20 C', 'Temp = 30 C', 'Temp = 40 C', 'Temp = 50 C'], loc='upper left')
+plt.legend(['Temp = -10 C Y ='+str(slope_10)+'X',
+            'Temp = 0 C Y ='+str(slope0)+'X',
+            'Temp = 10 C Y ='+str(slope10)+'X',
+            'Temp = 20 C Y ='+str(slope20)+'X',
+            'Temp = 30 C Y ='+str(slope30)+'X',
+            'Temp = 40 C Y ='+str(slope40)+'X',
+            'Temp = 50 C Y ='+str(slope50)+'X'], loc='upper left')
 plt.xlabel('Velocity of the vehicle in m/s')
 plt.ylabel('Mach Number for corresponding speed')
 plt.grid()
